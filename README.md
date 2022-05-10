@@ -30,6 +30,8 @@ While the basic functionality is in place, the UI/UX needs a lot more polishing:
 3. Implement scroll with mouse (currently limited by Robot.js, and the lack of functionality therein. Frontend logic for the same is already in place).
 4. Overall better styling and CSS (I'm pretty bad at design :)).
 
+Will probably port to Nut.js because Robot.js is currently unmaintained and lacking functionality.
+
 ### Why?
 
 I'm too lazy to get out of bed to turn of the computer when it is connected to a monitor sitting far away from me ;).
