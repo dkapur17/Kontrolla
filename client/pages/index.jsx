@@ -62,10 +62,14 @@ const MouseControl = () => {
 
 
     useEffect(() => {
-        fetch('/api/inputHandler').finally(() => {
-            const tempSocket = io();
-            setSocket(tempSocket);
-        })
+        if (typeof (window) !== 'undefined') {
+            const isDev = process.env.NODE_ENV === 'development';
+            const socketRoute = isDev ? '/api/inputHandler' : `${window.location.origin}/api/inputHandler`;
+            fetch(socketRoute).finally(() => {
+                const tempSocket = io();
+                setSocket(tempSocket);
+            })
+        }
     }, []);
 
 
@@ -79,14 +83,12 @@ const MouseControl = () => {
         if (singleClickEvent === undefined) {
             setSingleClickEvent(setTimeout(() => {
                 setSingleClickEvent(undefined);
-                console.log("Single Click");
                 socket.emit('click', { button: 'left', double: false });
             }, doubleClickThreshold));
         }
         else {
             clearTimeout(singleClickEvent);
             setSingleClickEvent(undefined);
-            console.log("Double Click");
             socket.emit('click', { button: 'left', double: true });
         }
     };
@@ -185,7 +187,6 @@ const MouseControl = () => {
     };
 
     const handleKeyPress = button => {
-        console.log("Button pressed", button);
         if (button === "{shift}" || button === "{lock}")
             handleShift();
         else if (button === '{media}')

@@ -4,7 +4,7 @@ import { mouse } from '@nut-tree/nut-js';
 
 const ioHandler = (req, res) => {
     if (!res.socket.server.io) {
-        console.log('*First use, starting socket.io')
+        console.log('Initialized Socket on Server')
 
         const io = new Server(res.socket.server, {
             cors: {
@@ -48,7 +48,7 @@ const ioHandler = (req, res) => {
 
         res.socket.server.io = io
     } else {
-        console.log('socket.io already running');
+        console.log('Socket Running...');
     }
     res.end()
 }
