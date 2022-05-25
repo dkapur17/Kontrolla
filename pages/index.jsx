@@ -62,7 +62,7 @@ const MouseControl = () => {
 
 
     useEffect(() => {
-        fetch('/api/mouseHandler').finally(() => {
+        fetch('/api/inputHandler').finally(() => {
             const tempSocket = io();
             setSocket(tempSocket);
         })

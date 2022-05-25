@@ -1,10 +1,6 @@
 import { Server } from 'socket.io'
 import robot from 'robotjs';
-
-const clamp = (num, low, high) => {
-    return Math.max(Math.min(num, high));
-};
-
+import { mouse } from '@nut-tree/nut-js';
 
 const ioHandler = (req, res) => {
     if (!res.socket.server.io) {
@@ -28,13 +24,12 @@ const ioHandler = (req, res) => {
             socket.on('mouseMove', (args) => {
                 const { xChange, yChange } = args;
                 const { x, y } = robot.getMousePos();
-                const { height, width } = robot.getScreenSize();
-                robot.moveMouse(clamp(x + xChange, 0, width), clamp(y + yChange, 0, height));
+                robot.moveMouse(x + xChange, y + yChange);
             });
-            socket.on('mouseScroll', (args) => {
+            socket.on('mouseScroll', async (args) => {
                 const { xChange, yChange } = args;
-                robot.scrollMouse(xChange, yChange);
-
+                mouse.scrollUp(yChange);
+                await mouse.scrollRight(xChange);
             });
             socket.on('keypress', (args) => {
                 const { key, shift } = args;
