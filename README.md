@@ -1,5 +1,9 @@
 # Kontrolla
 
+<div align="center">
+    <img src="assets/Logo.png" width=300>
+</div>
+
 A web-based remote controller for your computer on any touch based device on the same network.
 ![UI](assets/UI.png)
 
